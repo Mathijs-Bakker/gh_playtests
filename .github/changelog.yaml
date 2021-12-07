@@ -1,0 +1,17 @@
+changelog:
+  exclude:
+    labels:
+      - bot
+      - report
+      - automated issue
+      - question
+  categories:
+    - title: Breaking Changes
+      labels:
+        - breaking-change
+    - title: New Features
+      labels:
+        - enhancement
+    - title: Other Changes
+      labels:
+        - "*"
