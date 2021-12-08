@@ -43,10 +43,10 @@ version-resolver:
     - 'skip-changelog'
 
 template: |
-  ## Changes
+  ## What's Changed
 
   $CHANGES
 
-  ## Contributers
+  ## Contributors
 
   $CONTRIBUTORS
