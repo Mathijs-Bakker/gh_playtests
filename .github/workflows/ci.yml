@@ -6,8 +6,10 @@ name: CI
 
 # Maybe a shorter/faster version is needed for PR's
 # on: [push, pull_request]
-on: push
-
+on:
+  push:
+    branches:
+      - master
 jobs:
   buildAndTestForSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
@@ -33,6 +35,15 @@ jobs:
 
     steps:
 
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # below throws an error... need to clone repo in project's /Packages path
+          # repository: UniDi/UniDi
+          # path: ${{ matrix.projectPath }}
+          lfs: true
+
       # Create Empty Unity project
       - name: Create Unity Project
         uses: jbltx/unity-create@v1.1
@@ -42,14 +53,14 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          # below throws an error... need to clone repo in project's /Packages path
-          # repository: UniDi/UniDi
-          # path: ${{ matrix.projectPath }}
-          lfs: true
+      # # Checkout
+      # - name: Checkout repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #     # below throws an error... need to clone repo in project's /Packages path
+      #     # repository: UniDi/UniDi
+      #     # path: ${{ matrix.projectPath }}
+      #     lfs: true
 
       # Cache
       - uses: actions/cache@v2
