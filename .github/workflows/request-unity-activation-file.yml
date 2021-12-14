@@ -1,4 +1,12 @@
-name: Unity Activation File Requester
+# This GH action requests an Unity activation file.
+# - Run this action
+# - Save the received file to your computer.
+# - Unpack (to an Unity_v###.x.ulf)
+# - Upload with the form at https://license.unity3d.com/manual
+# - You will receive a .ulf file
+# - Copy and paste its content into a UNITY_LICENSE named secret
+
+name: request Unity Activation File
 
 on: workflow_dispatch
 
