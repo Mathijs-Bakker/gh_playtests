@@ -37,9 +37,6 @@ jobs:
 
     steps:
 
-      - id: get-user
-        run: echo "::set-output name=containerUser::`id -u`:`id -g`"
-
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -55,11 +52,11 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
+      - run: |
+              sudo mkdir UnityProject/Library/Packages
       # Checkout
       - name: Checkout and Clone Repository
         uses: actions/checkout@v2
-        run: |
-              sudo mkdir UnityProject/Library/Packages
         with:
           # below throws an error... need to clone repo in project's /Packages path
           # repository: UniDi/UniDi
