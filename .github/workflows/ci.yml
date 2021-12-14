@@ -6,8 +6,10 @@ name: CI
 
 # Maybe a shorter/faster version is needed for PR's
 # on: [push, pull_request]
-on: push
-
+on:
+  push:
+    branches:
+      - master
 jobs:
   buildAndTestForSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
