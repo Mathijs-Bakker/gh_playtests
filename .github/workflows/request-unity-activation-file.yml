@@ -1,4 +1,4 @@
-name: Activation Request
+name: Unity Activation File Requester
 
 on: workflow_dispatch
 
