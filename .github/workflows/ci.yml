@@ -53,31 +53,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
-      # # Checkout
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
-      #   with:
-      #     # below throws an error... need to clone repo in project's /Packages path
-      #     # repository: UniDi/UniDi
-      #     # path: ${{ matrix.projectPath }}
-      #     lfs: true
-
       # Cache
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: Library
-      #     key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-      #     restore-keys: |
-      #       Library-
-
-      # # Test
-      # - name: Run tests
-      #   uses: game-ci/unity-test-runner@v2
-      #   env:
-      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      #   with:
-      #     githubToken: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Caching Unity Project Library
         uses: actions/cache@v2
         with:
@@ -88,7 +64,8 @@ jobs:
             Library-${{ matrix.projectPath }}-
             Library-
 
-      - name: Test runner
+      # Test Runner
+      - name: Run Tests
         uses: game-ci/unity-test-runner@v2
         id: testRunner
         env:
@@ -98,16 +75,40 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
+      # Upload Test Artifacts
+      - name: Upload Test Results Artifacts
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+
       # Build
-      - name: Build project
+      - name: Build 
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: WebGL
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+          customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
 
-      # Output
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build
-          path: build
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Build
+      #     path: build
+
+      # # Build
+      # - name: Build project
+      #   uses: game-ci/unity-builder@v2
+      #   env:
+      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      #   with:
+      #     targetPlatform: WebGL
+
+      # # Output
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Build
+      #     path: build
