@@ -4,7 +4,9 @@
   
 name: CI 
 
-on: [push, pull_request]
+# Maybe a shorter/faster version is needed for PR's
+# on: [push, pull_request]
+on: push
 
 jobs:
   buildAndTestForSupportedPlatforms:
