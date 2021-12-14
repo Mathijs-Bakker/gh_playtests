@@ -19,11 +19,11 @@ jobs:
         unityVersion:
           - 2019.4.1f1
         targetPlatform:
-          - Android # Build a Android standalone.
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - WebGL # WebGL.
+          # - Android # Build a Android standalone.
+          # - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          # - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          # - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          # - WebGL # WebGL.
           - iOS # Build an iOS player.
           # Not supported platforms by GitHub actions:
           # - Windows Store # Build a standalone for Windows Store devices.
@@ -38,7 +38,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: ${{ matrix.unityVersion }}
-          projectPath: ${{ matrix.projectPath }}/Packages
+          projectPath: ${{ matrix.projectPath }}
 
       # Checkout
       - name: Checkout repository
