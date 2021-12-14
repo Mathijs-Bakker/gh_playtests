@@ -67,7 +67,7 @@ jobs:
         with:
         # Repository owner and name. Ex: sudosubin/git-clone-action
         # Default: ${{ github.repository }}
-        repository: ''
+        # repository: ''
 
     # # Git host platform. Ex: github, gitlab, bitbucket, gitee, or else (git.suckless.org, ...)
     # # Default: 'github'
