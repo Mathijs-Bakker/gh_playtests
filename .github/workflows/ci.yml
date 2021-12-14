@@ -53,6 +53,15 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # below throws an error... need to clone repo in project's /Packages path
+          repository: UniDi/UniDi
+          # path: ${{ matrix.projectPath }}
+          path: UnityProject/Library/Packages
+
       # Cache
       - name: Caching Unity Project Library
         uses: actions/cache@v2
@@ -95,4 +104,3 @@ jobs:
           # Allow Dirty Build as the semantic version is doing unsuspecting things
           # this could be something to look further into
           allowDirtyBuild: true
-          # customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
