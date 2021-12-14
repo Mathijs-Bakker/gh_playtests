@@ -44,8 +44,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          repository: UniDi/UniDi
-          path: ${{ matrix.projectPath }}
+          # below throws an error... need to clone repo in project's /Packages path
+          # repository: UniDi/UniDi
+          # path: ${{ matrix.projectPath }}
           lfs: true
 
       # Cache
