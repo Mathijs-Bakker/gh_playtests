@@ -12,7 +12,9 @@ on:
       - master
 jobs:
   buildAndTestForSupportedPlatforms:
+
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+
     runs-on: ubuntu-latest
 
     strategy:
@@ -35,13 +37,13 @@ jobs:
 
     steps:
 
+      - id: get-user
+        run: echo "::set-output name=containerUser::`id -u`:`id -g`"
+
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          # below throws an error... need to clone repo in project's /Packages path
-          # repository: UniDi/UniDi
-          # path: ${{ matrix.projectPath }}
           lfs: true
 
       # Create Empty Unity project
@@ -54,18 +56,15 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
 
       # Checkout
-      # - name: Checkout and Clone Repository
-      #   uses: actions/checkout@v2
-      #   with:
-      #     # below throws an error... need to clone repo in project's /Packages path
-      #     # repository: UniDi/UniDi
-      #     # repository: UniDi/UniDi
-      #     # path: ${{ matrix.projectPath }}
-      #     path: UnityProject/Library/Packages
-
-      - name: SudoSubin
-        uses: sudosubin/git-clone-action@v1.0.1
+      - name: Checkout and Clone Repository
+        uses: actions/checkout@v2
+        run: |
+              sudo mkdir UnityProject/Library/Packages
         with:
+          # below throws an error... need to clone repo in project's /Packages path
+          # repository: UniDi/UniDi
+          # repository: UniDi/UniDi
+          # path: ${{ matrix.projectPath }}
           path: UnityProject/Library/Packages
 
       # Cache
