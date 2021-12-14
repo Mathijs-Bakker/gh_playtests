@@ -78,7 +78,7 @@ jobs:
     # ref: ''
 
       # # Relative path from current directory, where to clone.
-        path: 'UnityProject/Library/Packages'
+        path: UnityProject/Library/Packages
 
       # Cache
       - name: Caching Unity Project Library
