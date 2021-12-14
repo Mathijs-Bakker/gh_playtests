@@ -65,20 +65,7 @@ jobs:
 
       - uses: sudosubin/git-clone-action@v1
         with:
-        # Repository owner and name. Ex: sudosubin/git-clone-action
-        # Default: ${{ github.repository }}
-        # repository: ''
-
-    # # Git host platform. Ex: github, gitlab, bitbucket, gitee, or else (git.suckless.org, ...)
-    # # Default: 'github'
-    # platform: ''
-
-    # # Git branch, tag, or specific commit SHA to checkout.
-    # # Default: (auto default branch)
-    # ref: ''
-
-      # # Relative path from current directory, where to clone.
-        path: UnityProject/Library/Packages
+          path: UnityProject/Library/Packages
 
       # Cache
       - name: Caching Unity Project Library
