@@ -7,15 +7,61 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Build my project
+  buildAndTestForSupportedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - UnityProject
+        unityVersion:
+          - 2019.4.1f1
+        targetPlatform:
+          - Android # Build a Android standalone.
+          - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          - WebGL # WebGL.
+          - iOS # Build an iOS player.
+          # Not supported platforms by GitHub actions:
+          # - Windows Store # Build a standalone for Windows Store devices.
+          # - PS4 # Build a Playstation 4 standalone.
+
     steps:
+
+      # Activation
+      - name: Request activation file
+
+        uses: actions/checkout@v2
+
+        uses: webbertakken/unity-request-manual-activation-file@v2
+        id: getManualLicenseFile
+
+        uses: actions/upload-artifact@v2
+        with:
+          name: Manual Activation File
+          path: ${{ steps.getManualLicenseFile.outputs.filepath }}
+
+
+      # Create Empty Unity project
+      - name: Create Unity Project
+        uses: jbltx/unity-create@v1.1
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+          projectPath: ${{ matrix.projectPath }}/Packages
+
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
+          repository: UniDi/UniDi
+          path: ${{ matrix.projectPath }}
           lfs: true
+
       # Cache
       - uses: actions/cache@v2
         with:
