@@ -69,7 +69,7 @@ jobs:
         with:
           # below throws an error... need to clone repo in project's /Packages path
           repository: UniDi/UniDi
-          path: ${{ matrix.projectPath }}
+          path: ${{ matrix.projectPath }}/${{ matrix.packagePath }}
           # path: UnityProject/Library/Packages/UniDi
 
       # Cache
