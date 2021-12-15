@@ -57,11 +57,11 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
 
       # Create UniDi path with write permissions
-      - run: |
+      # - run: |
               # sudo mkdir UnityProject/Library/Packages/UniDi
-              sudo mkdir ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
+              # sudo mkdir ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
               # sudo chmod -R UnityProject/Library/Packages/UniDi
-              sudo chmod -R ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
+              # sudo chmod -R ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
 
       # Checkout
       - name: Checkout and Clone Repository
@@ -69,8 +69,8 @@ jobs:
         with:
           # below throws an error... need to clone repo in project's /Packages path
           repository: UniDi/UniDi
-          # path: ${{ matrix.projectPath }}
-          path: UnityProject/Library/Packages/UniDi
+          path: ${{ matrix.projectPath }}
+          # path: UnityProject/Library/Packages/UniDi
 
       # Cache
       - name: Caching Unity Project Library
