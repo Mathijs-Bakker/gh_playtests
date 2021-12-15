@@ -17,6 +17,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    container:
+      # image:  cirrusci/flutter:v1.7.8-hotfix.4
+      options: --user root
+
     strategy:
       fail-fast: false
       matrix:
