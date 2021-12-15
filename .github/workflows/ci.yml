@@ -19,6 +19,7 @@ jobs:
 
     container:
       # image:  cirrusci/flutter:v1.7.8-hotfix.4
+      image: gh_playtests/gh_playtests 
       options: --user root
 
     strategy:
