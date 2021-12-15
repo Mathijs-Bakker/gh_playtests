@@ -19,7 +19,8 @@ jobs:
         projectPath:
           - UnityProject
         packagePath:
-          - Library/Packages/UniDi
+          # - Library/Packages/UniDi
+          - Assets/UniDi
         unityVersion:
           - 2019.4.1f1
         targetPlatform:
@@ -65,7 +66,8 @@ jobs:
 
       - name: Access cloned repository content
         run: |
-          cd ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
+          # cd ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
+          cd ${{ matrix.projectPath }}/${{ matrix.packagePath }}
           ls -l
 
       # Cache
