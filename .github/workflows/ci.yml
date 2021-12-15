@@ -60,7 +60,7 @@ jobs:
         with:
           repository: UniDi/UniDi
           # path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
-          path: ${{ GITHUB_WORKSPACE }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
+          path: $GITHUB_WORKSPACE/${{ matrix.projectPath }}/${{ matrix.packagePath }}
           # path: UnityProject/Library/Packages/UniDi
 
       - name: Access cloned repository content
