@@ -17,10 +17,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container:
-      # image:  cirrusci/flutter:v1.7.8-hotfix.4
-      image: mathijs-bakker/gh_playtests 
-      options: --user root
+    # container:
+    #   # image:  cirrusci/flutter:v1.7.8-hotfix.4
+    #   image: mathijs-bakker/gh_playtests 
+    #   options: --user root
 
     strategy:
       fail-fast: false
@@ -45,6 +45,9 @@ jobs:
           # - PS4 # Build a Playstation 4 standalone.
 
     steps:
+
+      - name: Use Docker in rootless mode.
+          uses: ScribeMD/rootless-docker@0
 
       # Checkout
       - name: Checkout repository
