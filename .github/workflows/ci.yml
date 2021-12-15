@@ -46,7 +46,7 @@ jobs:
           lfs: true
 
       # Create Empty Unity project
-      - name: Create Unity Project
+      - name: Create Unity Project @ ${{ matrix.projectPath }}
         uses: jbltx/unity-create@v1.1
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -58,7 +58,6 @@ jobs:
       - name: Checkout and Clone Repository
         uses: actions/checkout@v2
         with:
-          # below throws an error... need to clone repo in project's /Packages path
           repository: UniDi/UniDi
           path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
           # path: UnityProject/Library/Packages/UniDi
