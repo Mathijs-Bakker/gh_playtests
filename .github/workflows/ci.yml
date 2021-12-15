@@ -57,9 +57,9 @@ jobs:
       # Create UniDi path with write permissions
       - run: |
               # sudo mkdir UnityProject/Library/Packages/UniDi
-              sudo mkdir ${{ matrix.projectPath }}${{ matrix.packagePath }}
+              sudo mkdir ${{ matrix.projectPath }}/${{ matrix.packagePath }}
               # sudo chmod -R UnityProject/Library/Packages/UniDi
-              sudo chmod -R ${{ matrix.projectPath }}${{ matrix.packagePath }}
+              sudo chmod -R ${{ matrix.projectPath }}/${{ matrix.packagePath }}
 
       # Checkout
       - name: Checkout and Clone Repository
