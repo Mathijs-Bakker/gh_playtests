@@ -14,12 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        homePath: 
-          - /home/runner/work/gh_playtests/gh_playtests
         projectPath:
           - UnityProject
-        packagePath:
-          # - Library/Packages/UniDi
+        assetsPath:
           - Assets/UniDi
         unityVersion:
           - 2019.4.1f1
@@ -55,20 +52,16 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
-      # Checkout and clone UniDi into Packages
+      # Checkout and clone UniDi into Assets 
+      # There's no need to do complicated stuff like managing the project manifest
+      # We just clone to the Assets folder as tests will run from here.
+      # If there's another way in the future (like automating the process with a cmd for
+      # Unity's Package Manager) then that would be cool to implement in the Ci workflow.
       - name: Checkout and Clone Repository
         uses: actions/checkout@v2
         with:
           repository: UniDi/UniDi
-          # path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
-          path: ${{ matrix.projectPath }}/${{ matrix.packagePath }}
-          # path: UnityProject/Library/Packages/UniDi
-
-      - name: Access cloned repository content
-        run: |
-          # cd ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
-          cd ${{ matrix.projectPath }}/${{ matrix.packagePath }}
-          ls -l
+          path: ${{ matrix.projectPath }}/${{ matrix.assetsPath }}
 
       # Cache
       - name: Caching Unity Project Library
