@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         homePath: 
-          - /home/runner/work/gh_playtests/gh_playtests/
+          - /home/runner/work/gh_playtests/gh_playtests
         projectPath:
           - UnityProject
         packagePath:
