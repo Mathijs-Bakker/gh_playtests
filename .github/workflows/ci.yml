@@ -52,8 +52,11 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
+      # Create UniDi path with write permissions
       - run: |
-              sudo mkdir UnityProject/Library/Packages
+              sudo mkdir UnityProject/Library/Packages/UniDi
+              sudo chmod -R UnityProject/Library/Packages/UniDi
+
       # Checkout
       - name: Checkout and Clone Repository
         uses: actions/checkout@v2
@@ -105,3 +108,4 @@ jobs:
           # Allow Dirty Build as the semantic version is doing unsuspecting things
           # this could be something to look further into
           allowDirtyBuild: true
+          # repository: UniDi/UniDi
