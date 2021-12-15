@@ -1,11 +1,5 @@
-# Setup CI workflow:
-  # create new unity project
-  # clone unidi into project
-  
 name: CI 
 
-# Maybe a shorter/faster version is needed for PR's
-# on: [push, pull_request]
 on:
   push:
     branches:
@@ -16,11 +10,6 @@ jobs:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
 
     runs-on: ubuntu-latest
-
-    # container:
-    #   # image:  cirrusci/flutter:v1.7.8-hotfix.4
-    #   image: mathijs-bakker/gh_playtests 
-    #   options: --user root
 
     strategy:
       fail-fast: false
@@ -46,7 +35,8 @@ jobs:
 
     steps:
 
-      - name: Use Docker in rootless mode.
+      # Need to be rootless to have write access for checkout and clone repo
+      - name: Use container in rootless mode
         uses: ScribeMD/rootless-docker@0.1.1
 
       # Checkout
@@ -64,20 +54,13 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           projectPath: ${{ matrix.projectPath }}
 
-      # Create UniDi path with write permissions
-      # - run: |
-              # sudo mkdir UnityProject/Library/Packages/UniDi
-              # sudo mkdir ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
-              # sudo chmod -R UnityProject/Library/Packages/UniDi
-              # sudo chmod -R ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
-
-      # Checkout
+      # Checkout and clone UniDi into Packages
       - name: Checkout and Clone Repository
         uses: actions/checkout@v2
         with:
           # below throws an error... need to clone repo in project's /Packages path
           repository: UniDi/UniDi
-          path: ${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
+          path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
           # path: UnityProject/Library/Packages/UniDi
 
       # Cache
@@ -122,4 +105,3 @@ jobs:
           # Allow Dirty Build as the semantic version is doing unsuspecting things
           # this could be something to look further into
           allowDirtyBuild: true
-          # repository: UniDi/UniDi
