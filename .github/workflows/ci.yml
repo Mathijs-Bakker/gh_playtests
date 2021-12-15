@@ -46,7 +46,7 @@ jobs:
           lfs: true
 
       # Create Empty Unity project
-      - name: Create Unity Project @ ${{ matrix.projectPath }}
+      - name: Create Unity Project
         uses: jbltx/unity-create@v1.1
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -61,6 +61,11 @@ jobs:
           repository: UniDi/UniDi
           path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
           # path: UnityProject/Library/Packages/UniDi
+
+      - name: Access cloned repository content
+        run: |
+          cd ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
+          ls -l
 
       # Cache
       - name: Caching Unity Project Library
