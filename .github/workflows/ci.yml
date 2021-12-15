@@ -59,10 +59,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           # below throws an error... need to clone repo in project's /Packages path
-          # repository: UniDi/UniDi
-          # repository: UniDi/UniDi
+          repository: UniDi/UniDi
           # path: ${{ matrix.projectPath }}
-          path: UnityProject/Library/Packages
+          path: UnityProject/Library/Packages/UniDi
 
       # Cache
       - name: Caching Unity Project Library
