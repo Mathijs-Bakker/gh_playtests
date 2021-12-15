@@ -59,12 +59,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: UniDi/UniDi
-          path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
+          path: ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
           # path: UnityProject/Library/Packages/UniDi
 
       - name: Access cloned repository content
         run: |
-          cd ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}/UniDi
+          cd ${{ matrix.homePath }}/${{ matrix.projectPath }}/${{ matrix.packagePath }}
           ls -l
 
       # Cache
