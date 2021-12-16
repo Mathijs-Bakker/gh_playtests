@@ -10,8 +10,8 @@ body:
 
   - type: input
     attributes:
-      label: "UniDi version (UniDi -v)"
-      placeholder: "0.0.0 commit db1b0ee3b30f"
+      label: "UniDi version"
+      placeholder: "0.0.1 commit db1b0ee3b30f"
     validations:
       required: true
   - type: input
@@ -23,7 +23,7 @@ body:
   - type: input
     attributes:
       label: "Unity version"
-      placeholder: "Unity 2019.LTS"
+      placeholder: "Unity 2019.4.0f1"
     validations:
       required: true
 
